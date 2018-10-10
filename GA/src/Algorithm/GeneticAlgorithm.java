@@ -35,11 +35,11 @@ public class GeneticAlgorithm {
             Chromosome d = population.getValuePopulation().get(r.nextInt(Population.size));
 
             Chromosome parent1, parent2;
-            if (problem.fitness(a) > problem.fitness(b)) parent1 = a;
-            else parent1 = b;
+            if (problem.fitness(a) > problem.fitness(b)) parent1 = b;
+            else parent1 = a;
 
-            if (problem.fitness(c) > problem.fitness(d)) parent2 = a;
-            else parent2 = b;
+            if (problem.fitness(c) > problem.fitness(d)) parent2 = d;
+            else parent2 = c;
 
             if (parent1.equals(parent2) == false) {
                 Chromosome child[] = cro.crossover(parent1, parent2, r);
