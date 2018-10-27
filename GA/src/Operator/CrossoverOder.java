@@ -27,22 +27,17 @@ public class CrossoverOder extends Crossover {
 
     private Chromosome crossoverOrder1(Chromosome parent1, Chromosome parent2, int head, int tail) {
         int[] valueChoromosome = new int[Chromosome.size];
-        int j = 0, i = 0;
+        int j = tail + 1, i = tail + 1;
         System.arraycopy(parent1.getValueChromosome(), head, valueChoromosome, head, tail - head + 1);
-        //Mảng chứa các phần tử chưa xuất hiện ở valueChoromosome trong parent2
-        int temp2[] = new int[Chromosome.size - tail + head - 1];
-
-        for (int value : parent2.getValueChromosome()) {
-            if (search(valueChoromosome, value) == false) {
-                temp2[i++] = value;
-            }
-        }
-
-        for (int value : temp2) {
+        
+         do {
+            if (i == Chromosome.size) i = 0;
             if (j == Chromosome.size) j = 0;
-            if (j == head) j = tail + 1;
-            valueChoromosome[j++] = value;
-        }
+            if (search(valueChoromosome, parent2.getValueChromosome()[j]) == false) {
+                valueChoromosome[i++] = parent2.getValueChromosome()[j];
+            }
+            j++;
+        } while (j != tail + 1);
 
         return new Chromosome(valueChoromosome);
     }
